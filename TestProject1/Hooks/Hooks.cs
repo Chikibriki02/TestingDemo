@@ -14,7 +14,7 @@ public static class Hooks
     {
         var chromeOptions = new ChromeOptions();
         chromeOptions.AddArgument("--force-device-scale-factor=0.85");
-        //chromeOptions.AddArgument("--headless");
+        chromeOptions.AddArgument("--headless");
         chromeOptions.AddArgument("--window-size=1920,1080");
         chromeOptions.PageLoadStrategy = PageLoadStrategy.Normal;
         var driver = new ChromeDriver(chromeOptions);
