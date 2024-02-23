@@ -12,5 +12,5 @@ public class Cookies
     }
     
     [FindsBy(How = How.ClassName, Using = "fc-cta-consent")]
-    public IWebElement ?Accept { get; set;}
+    public IWebElement Accept { get; set;}
 }

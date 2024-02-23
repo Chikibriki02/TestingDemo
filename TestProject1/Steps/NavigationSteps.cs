@@ -48,7 +48,15 @@ public class NavigationSteps
     [Given(@"user accepts cookies")]
     public void GivenUserAcceptsCookies()
     {
-        Cookies.Accept.Click();
+        try
+        {
+            Cookies.Accept.Click();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"Куки не были отображены \n{e}");
+        }
+        
     }
 
     [Given(@"user selects '(.*)' category")]
