@@ -11,11 +11,11 @@ public class TestPage : AbstactPage
 {
     public TestPage(IWebDriver driver) : base(driver)
     {
-        wait = new WebDriverWait(driver, timeout);
+        _wait = new WebDriverWait(driver, _timeout);
     }
 
-    private TimeSpan timeout = TimeSpan.FromSeconds(10);
-    private WebDriverWait wait;
+    private readonly TimeSpan _timeout = TimeSpan.FromSeconds(10);
+    private readonly WebDriverWait _wait;
     
     [FindsBy(How = How.ClassName, Using = "col-md-6")]
     public IWebElement Text { get; set; }
@@ -29,8 +29,8 @@ public class TestPage : AbstactPage
     
     private CategoryTab CategoryTab { get; set; }
 
-    public PacticeForm PacticeForm =>
-        new PacticeForm(driver, wait.Until(ExpectedConditions.ElementToBeClickable((By.ClassName("practice-form-wrapper")))));
+    public PracticeForm PacticeForm =>
+        new(driver, _wait.Until(ExpectedConditions.ElementToBeClickable((By.ClassName("practice-form-wrapper")))));
 
     public void OpenCategory(string name)
     {

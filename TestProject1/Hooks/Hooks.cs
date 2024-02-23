@@ -19,7 +19,9 @@ public class Hooks
     public void Setup()
     {
         var chromeOptions = new ChromeOptions();
-        chromeOptions.AddArgument("--force-device-scale-factor=0.9");
+        chromeOptions.AddArgument("--force-device-scale-factor=0.85");
+        chromeOptions.AddArgument("--headless");
+        chromeOptions.AddArgument("--window-size=1920,1080");
         chromeOptions.PageLoadStrategy = PageLoadStrategy.Normal;
         var driver = new ChromeDriver(chromeOptions);
         driver.Manage().Window.Maximize();
@@ -32,7 +34,6 @@ public class Hooks
             Cookies = new Cookies(driver)
         };
 
-        // Регистрируем SeleniumContext в контейнере SpecFlow для дальнейшего использования в шагах
         _container.RegisterInstanceAs<TestContext>(seleniumContext);
     }
 

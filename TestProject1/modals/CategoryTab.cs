@@ -44,6 +44,6 @@ public class CategoryTab
 
     public void OpenTab(string tabName)
     {
-        Tabs.FirstOrDefault(x=>x.Text == tabName).Click();
+        Tabs.First(x=>x.Text == tabName).Click();
     }
 }

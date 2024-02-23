@@ -4,14 +4,10 @@ using TestProject1.Modals;
 
 namespace TestProject1.Pages;
 
-public class HomePage : AbstactPage
+public class HomePage(IWebDriver driver) : AbstactPage(driver)
 {
     [FindsBy(How = How.XPath, Using = "//h5[contains(text(), 'Elements')]")]
-    private IWebElement _elements;
-    
-    public HomePage(IWebDriver driver) : base(driver)
-    {
-    }
+    private readonly IWebElement _elements;
 
     public void ClickOnButton(string name)
     {

@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using OpenQA.Selenium.Interactions;
+using System.Diagnostics;
 using TechTalk.SpecFlow;
 using TestProject1.Modals;
 using TestProject1.Pages;
