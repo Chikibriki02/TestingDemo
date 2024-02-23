@@ -35,4 +35,10 @@
     <PackageReference Include="SpecFlow.NUnit" Version="3.9.74" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Docs\Images\image.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

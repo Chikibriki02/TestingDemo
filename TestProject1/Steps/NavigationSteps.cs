@@ -15,7 +15,7 @@ public class NavigationSteps
     private TestPage TestPage { get; set; }
     private Cookies Cookies { get; set; }
 
-    private readonly string _imageRoute = "E:\\image\\image.jpg";
+    private readonly string _imageRoute = $"{AppDomain.CurrentDomain.BaseDirectory}\\Docs\\Images\\image.png";
 
     public NavigationSteps(TestContext testContext)
     {
