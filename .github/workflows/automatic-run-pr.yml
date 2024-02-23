@@ -22,7 +22,7 @@ jobs:
       run: dotnet restore 
 
     - name: Build 
-      run: dotnet build --no-restore --verbosity normal --logger "nunit;LogFileName=test-results.xml"
+      run: dotnet build --no-restore --verbosity normal --logger "junit;LogFileName=test-results.xml"
 
     - name: Test 
       run: dotnet test --no-build --verbosity normal 
