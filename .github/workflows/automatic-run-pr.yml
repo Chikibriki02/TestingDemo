@@ -26,5 +26,19 @@ jobs:
 
     - name: Test 
       run: dotnet test --no-build --verbosity normal 
+      
+    - name: Upload test results
+      uses: actions/upload-artifact@v2
+      with:
+        name: Test Results
+        path: path/to/test-results.xml
 
+    - name: Codecov
+      uses: codecov/codecov-action@v1
+      with:
+        file: ./path/to/test-results.xml
+        flags: unittests
+        name: codecov-umbrella
+        fail_ci_if_error: true
+        verbose: true
 
