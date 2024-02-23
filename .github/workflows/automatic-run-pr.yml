@@ -22,23 +22,14 @@ jobs:
       run: dotnet restore 
 
     - name: Build 
-      run: dotnet build --no-restore --verbosity normal --logger "junit;LogFileName=test-results.xml"
+      run: dotnet build --no-restore
 
-    - name: Test 
-      run: dotnet test --no-build --verbosity normal 
-      
-    - name: Upload test results
-      uses: actions/upload-artifact@v2
-      with:
-        name: Test Results
-        path: path/to/test-results.xml
+    - name: Run tests
+      run: dotnet test --no-restore --verbosity normal --logger "nunit;LogFilePath=test-results.xml"
 
-    - name: Codecov
-      uses: codecov/codecov-action@v1
+    - name: Publish Unit Test Results
+      uses: EnricoMi/publish-unit-test-result-action@v1
+      if: always()
       with:
-        file: ./path/to/test-results.xml
-        flags: unittests
-        name: codecov-umbrella
-        fail_ci_if_error: true
-        verbose: true
+        files: '**/test-results.xml'
 
