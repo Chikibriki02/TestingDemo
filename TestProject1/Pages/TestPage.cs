@@ -7,7 +7,7 @@ using TestProject1.Modals;
 
 namespace TestProject1.Pages;
 
-public class TestPage : AbstactPage
+public class TestPage : AbstractPage
 {
     public TestPage(IWebDriver driver) : base(driver)
     {
@@ -17,26 +17,24 @@ public class TestPage : AbstactPage
     private readonly TimeSpan _timeout = TimeSpan.FromSeconds(10);
     private readonly WebDriverWait _wait;
     
-    [FindsBy(How = How.ClassName, Using = "col-md-6")]
-    public IWebElement Text { get; set; }
+    public IWebElement Text => Driver.FindElement(By.ClassName("col-md-"));
 
-    [FindsBy(How = How.ClassName,Using = "element-group")]
-    private IList<IWebElement> categories;
+    private IList<IWebElement> Categories => Driver.FindElements(By.ClassName("element-group"));
+
+    private IWebElement Form => Driver.FindElement(By.ClassName("practice-form-wrapper"));
     
-    private IWebElement Form => driver.FindElement(By.ClassName("practice-form-wrapper"));
-    
-    private IWebElement OpenedCategoryTab => driver.FindElement(By.XPath("//*[contains(@class, 'element-list collapse show')]/.."));
+    private IWebElement OpenedCategoryTab => Driver.FindElement(By.XPath("//*[contains(@class, 'element-list collapse show')]/.."));
     
     private CategoryTab CategoryTab { get; set; }
 
-    public PracticeForm PacticeForm =>
-        new(driver, _wait.Until(ExpectedConditions.ElementToBeClickable((By.ClassName("practice-form-wrapper")))));
+    public PracticeForm PracticeForm =>
+        new(Driver, _wait.Until(ExpectedConditions.ElementToBeClickable((By.ClassName("practice-form-wrapper")))));
 
     public void OpenCategory(string name)
     {
         OpenedCategoryTab.FindElement(By.ClassName("group-header")).Click();
-        var t = categories.Select(x => x.Text).ToList();
-        CategoryTab = new CategoryTab(driver,categories.First(x => x.Text.Contains(name)));
+        var t = Categories.Select(x => x.Text).ToList();
+        CategoryTab = new CategoryTab(Driver,Categories.First(x => x.Text.Contains(name)));
         CategoryTab.OpenCategory();
     }
 

@@ -3,13 +3,13 @@ using SeleniumExtras.PageObjects;
 
 namespace TestProject1.Pages;
 
-public abstract class AbstactPage
+public abstract class AbstractPage
 {
-    protected IWebDriver driver;
-    
-    protected AbstactPage(IWebDriver driver)
+    protected IWebDriver Driver;
+
+    protected AbstractPage(IWebDriver driver)
     {
-        this.driver = driver;
+        this.Driver = driver;
         PageFactory.InitElements(driver, this);
     }
 }

@@ -4,13 +4,12 @@ namespace TestProject1.Modals;
 
 public class Cookies
 {
-    private IWebDriver driver;
+    private readonly IWebDriver _driver;
     public Cookies(IWebDriver driver)
     {
-        this.driver = driver;
+        this._driver = driver;
         PageFactory.InitElements(driver, this);
     }
-    
-    [FindsBy(How = How.ClassName, Using = "fc-cta-consent")]
-    public IWebElement Accept { get; set;}
+
+    public IWebElement? Accept => _driver.FindElement(By.ClassName("fc-cta-consent"));
 }

@@ -8,23 +8,15 @@ using TestContext = TestProject1.Context.TestContext;
 namespace TestProject1.Steps;
 
 [Binding]
-public class NavigationSteps
+public class NavigationSteps(TestContext testContext)
 {
-    private IWebDriver Driver { get; set; }
-    private HomePage HomePage { get; set; }
-    private TestPage TestPage { get; set; }
-    private Cookies Cookies { get; set; }
+    private IWebDriver Driver { get; set; } = testContext.Driver;
+    private HomePage HomePage { get; set; } = testContext.HomePage;
+    private TestPage TestPage { get; set; } = testContext.TestPage;
+    private Cookies Cookies { get; set; } = testContext.Cookies;
 
     private readonly string _imageRoute = $"{AppDomain.CurrentDomain.BaseDirectory}Docs/Images/image.png";
 
-    public NavigationSteps(TestContext testContext)
-    {
-        Driver = testContext.Driver;
-        HomePage = testContext.HomePage;
-        TestPage = testContext.TestPage;
-        Cookies = testContext.Cookies;
-    }
-    
     [Given(@"Open the page for testing")]
     public void GivenOpenThePageForTesting()
     {
@@ -76,30 +68,30 @@ public class NavigationSteps
     [When(@"user set '(.*)' to '(.*)' field in Form")]
     public void WhenUserSetLastNameFieldInForm(string value, string field)
     {
-       TestPage.PacticeForm.SetField(value,field);
+       TestPage.PracticeForm.SetField(value,field);
     }
 
     [When(@"user set Gender to '(.*)' in Form")]
     public void WhenUserSetGenderToInForm(string gender)
     {
-        TestPage.PacticeForm.SetGender(gender);
+        TestPage.PracticeForm.SetGender(gender);
     }
 
     [When(@"user fill '(.*)' to Subject Field in Form")]
     public void WhenUserFillToSubjectFieldInForm(string subject)
     {
-        TestPage.PacticeForm.SelectSubject(subject);
+        TestPage.PracticeForm.SelectSubject(subject);
     }
 
     [When(@"user click submit button")]
     public void WhenUserClickSubmitButton()
     {
-        TestPage.PacticeForm.ClickSubmit();
+        TestPage.PracticeForm.ClickSubmit();
     }
 
     [When(@"user upload an image in Form")]
     public void WhenUserUploadAnImageInForm()
     {
-        TestPage.PacticeForm.UploadImage(_imageRoute);
+        TestPage.PracticeForm.UploadImage(_imageRoute);
     }
 }

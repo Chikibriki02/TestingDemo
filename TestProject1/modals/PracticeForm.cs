@@ -22,6 +22,7 @@ public class PracticeForm : AbstactElement
 
     private readonly Dictionary<string, IWebElement> _inputFields;
         
+    //TODO: Rewrite to POM as recommendation for Selenium 4 
     [FindsBy(How = How.Id, Using = "firstName")]
     private IWebElement FirstNameInput { get; set; }
     
@@ -41,7 +42,7 @@ public class PracticeForm : AbstactElement
     private IList<IWebElement> GenderButtons { get; set; } 
     
     [FindsBy(How = How.CssSelector, Using = "[class*=\"custom-control custom-checkbox\"]")]
-    private IList<IWebElement> _hobbiesButtons { get; set; }
+    private IList<IWebElement> HobbiesButtons { get; set; }
     
     [FindsBy(How = How.CssSelector, Using = ".subjects-auto-complete__input input[type='text']")]
     private IWebElement SubjectInputDropdown { get; set; }
@@ -57,23 +58,23 @@ public class PracticeForm : AbstactElement
     public void SelectSubject(string subjectName)
     {
         SubjectInputDropdown.SendKeys(subjectName);
-        SubjectDropdown = new SubjectInputDropdownList(driver, this.parentElement);
+        SubjectDropdown = new SubjectInputDropdownList(Driver, this.ParentElement);
         SubjectDropdown.SelectSubjectValue(subjectName);
     }
 
     public void ClickSubmit()
     {
         //Рекламное окно перекрывет кнопку Submit
-        ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].scrollIntoView(true); window.scrollBy(0, 100);", SubmitButton);
+        ((IJavaScriptExecutor)Driver).ExecuteScript("arguments[0].scrollIntoView(true); window.scrollBy(0, 100);", SubmitButton);
         SubmitButton.Click();
     }
     public void SetGender(string gender) => GenderButtons.First(x=>x.Text == gender).Click();
 
     private class SubjectInputDropdownList(IWebDriver driver, IWebElement parentElement) : AbstactElement(driver, parentElement)
     {
-        private IList<IWebElement> _values => wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.CssSelector("[id^='react-select-2']")));
+        private IList<IWebElement> Values => Wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.CssSelector("[id^='react-select-2']")));
 
-        public void SelectSubjectValue(string name) => _values.First(x=>x.Text == name).Click();
+        public void SelectSubjectValue(string name) => Values.First(x=>x.Text == name).Click();
         
     }
     

@@ -6,28 +6,15 @@ using IWebElement = OpenQA.Selenium.IWebElement;
 
 namespace TestProject1.Modals;
 
-public class CategoryTab
+public class CategoryTab(IWebDriver driver, IWebElement parentElement) : AbstactElement(driver, parentElement)
 {
-    private readonly IWebDriver driver;
-    private readonly IWebElement parentElement;
-    private TimeSpan timeout = TimeSpan.FromSeconds(10);
-    private WebDriverWait wait;
+    private IWebElement CategoryName => ParentElement.FindElement(By.ClassName("header-text"));
     
-    public CategoryTab(IWebDriver driver, IWebElement parentElement)
-    {
-        this.driver = driver;
-        this.parentElement = parentElement;
-        PageFactory.InitElements(driver, this);
-        wait = new WebDriverWait(driver, timeout);
-    }
-
-    private IWebElement CategoryName => parentElement.FindElement(By.ClassName("header-text"));
+    private IList<IWebElement> Tabs => ParentElement.FindElements(By.CssSelector("[class*=\"btn btn-light\"]"));
     
-    private IList<IWebElement> Tabs => parentElement.FindElements(By.CssSelector("[class*=\"btn btn-light\"]"));
+    private IList<IWebElement> Tabss => Wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.CssSelector("[class*=\"btn btn-light\"]")));
     
-    private IList<IWebElement> Tabss => wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.CssSelector("[class*=\"btn btn-light\"]")));
-    
-    private IWebElement CheckForCollapsedList => parentElement.FindElement(By.CssSelector("[class*=\"element-list collapse\"]"));
+    private IWebElement CheckForCollapsedList => ParentElement.FindElement(By.CssSelector("[class*=\"element-list collapse\"]"));
 
     public bool IsOpen()
     {
@@ -38,7 +25,7 @@ public class CategoryTab
     {
         if (!IsOpen())
             CategoryName.Click();
-        WaiterConditions.WaitForElementClass(driver,parentElement,By.CssSelector("[class*=\"element-list collapse\"]"), "show",
+        WaiterConditions.WaitForElementClass(Driver, ParentElement, By.CssSelector("[class*=\"element-list collapse\"]"), "show",
             TimeSpan.FromSeconds(10));
     }
 
