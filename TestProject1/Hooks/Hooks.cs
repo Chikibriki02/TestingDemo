@@ -36,7 +36,6 @@ namespace TestProject1.Hooks
         [BeforeScenario]
         public static void Scenario(TestContext context)
         {
-            context.Driver.SwitchTo().NewWindow(WindowType.Tab);
         }
 
         [AfterFeature]

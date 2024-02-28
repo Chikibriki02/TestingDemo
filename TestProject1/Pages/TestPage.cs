@@ -17,7 +17,7 @@ public class TestPage : AbstractPage
     private readonly TimeSpan _timeout = TimeSpan.FromSeconds(10);
     private readonly WebDriverWait _wait;
     
-    public IWebElement Text => Driver.FindElement(By.ClassName("col-md-"));
+    public IWebElement Text => Driver.FindElement(By.ClassName("col-md-6"));
 
     private IList<IWebElement> Categories => Driver.FindElements(By.ClassName("element-group"));
 
