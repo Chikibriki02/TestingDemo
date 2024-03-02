@@ -1,6 +1,7 @@
 ﻿using BoDi;
 using OpenQA.Selenium.Chrome;
 using TechTalk.SpecFlow;
+using TestProject1.Context;
 using TestProject1.Modals;
 using TestProject1.Pages;
 using TestContext = TestProject1.Context.TestContext;
@@ -10,6 +11,10 @@ namespace TestProject1.Hooks
     [Binding]
     public static class Hooks
     {
+        [BeforeTestRun]
+        public static void BeforeScenario(IObjectContainer container)
+        {
+        }
 
         [BeforeFeature]
         public static void Setup(IObjectContainer container)

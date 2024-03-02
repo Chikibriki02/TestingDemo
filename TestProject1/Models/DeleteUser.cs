@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TestProject1.Models
 {
-    internal class DeleteUser
+    public class DeleteUser
     {
         [JsonProperty("userId")]
         public string userId { get; set; }

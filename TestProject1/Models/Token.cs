@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TestProject1.Models
 {
-    internal class Token
+    public class Token
     {
         public string token { get; set; }
         public DateTime expires { get; set; }
