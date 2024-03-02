@@ -1,13 +1,11 @@
 name: Run Tests 
 
-on: 
+on:
   workflow_dispatch:
-  push: 
-    branches: [ master ] # На ветку main
-  pull_request: # При создании Pull Request
+  push:
     branches: [ master ]
-  
-  
+  pull_request:
+    branches: [ master ]
 
 permissions:
   checks: write
@@ -39,4 +37,3 @@ jobs:
       if: always()
       with:
         files: '**/test-results.xml'
-
