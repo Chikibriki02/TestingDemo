@@ -1,11 +1,14 @@
 name: Run Tests 
 
 on: 
+  workflow_dispatch:
   push: 
     branches: [ master ] # На ветку main
   pull_request: # При создании Pull Request
     branches: [ master ]
-    
+  
+  
+
 permissions:
   checks: write
   pull-requests: write
