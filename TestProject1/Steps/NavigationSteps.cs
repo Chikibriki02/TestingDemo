@@ -1,9 +1,12 @@
 ﻿using OpenQA.Selenium.Interactions;
 using System.Diagnostics;
+using System.Xml.Linq;
+using FluentAssertions;
 using TechTalk.SpecFlow;
 using TestProject1.Modals;
 using TestProject1.Pages;
 using TestContext = TestProject1.Context.TestContext;
+using OpenQA.Selenium.Support.UI;
 
 namespace TestProject1.Steps;
 
@@ -15,19 +18,48 @@ public class NavigationSteps(TestContext testContext)
     private TestPage TestPage { get; set; } = testContext.TestPage;
     private Cookies Cookies { get; set; } = testContext.Cookies;
 
+    private IAlert alert {get; set; }
+
     private readonly string _imageRoute = $"{AppDomain.CurrentDomain.BaseDirectory}Docs/Images/image.png";
+    private readonly string _expectedUserForm = "Thanks for submitting the form\r\nLabel Values\r\nStudent Name QWERTY YTREWQ\r\nStudent Email qwerty@gmail.com\r\nGender Male\r\nMobile 1234567890\r\nDate of Birth 19 June,2001\r\nSubjects English\r\nHobbies\r\nPicture image.png\r\nAddress\r\nState and City\r\nClose";
+
+    private void ClickOnButton(string buttonName)
+    {
+        switch (buttonName)
+        {
+            case "Elements": HomePage._elements.Click(); break;
+            case "Click Button to see alert": TestPage.AlertPage.AlelrtButton.Click(); break;
+            case "On button click, alert will appear after 5 seconds": TestPage.AlertPage.Alelrt5SecButton.Click(); break;
+            case "On button click, confirm box will appear": TestPage.AlertPage.AlelrtConfirmButton.Click(); break;
+            case "On button click, prompt box will appear": TestPage.AlertPage.AlelrtTextButton.Click(); break;
+            case "qw": HomePage._elements.Click(); break;
+
+            default: _: throw new Exception("No such button"); break;
+        }
+    }
+
+    private void ClickOnAlertButton(string buttonName)
+    {
+        switch (buttonName)
+        {
+            case "Ok": alert.Accept(); break;
+            case "Cancel": alert.Dismiss(); break;
+
+            default: _: throw new Exception("No such button"); break;
+        }
+    }
 
     [Given(@"Open the page for testing")]
     public void GivenOpenThePageForTesting()
     {
         Driver.Navigate().GoToUrl("https://demoqa.com");
     }
-    
+
     [When(@"user clicks '(.*)' button")]
     [Given(@"user clicks '(.*)' button")]
     public void WhenUserClicksButton(string element)
     {
-        HomePage.ClickOnButton(element);
+        ClickOnButton(element);
     }
 
     [Then(@"text for testing is visible")]
@@ -48,7 +80,7 @@ public class NavigationSteps(TestContext testContext)
         {
             Console.WriteLine($"Куки не были отображены \n{e}");
         }
-        
+
     }
 
     [Given(@"user selects '(.*)' category")]
@@ -68,7 +100,7 @@ public class NavigationSteps(TestContext testContext)
     [When(@"user set '(.*)' to '(.*)' field in Form")]
     public void WhenUserSetLastNameFieldInForm(string value, string field)
     {
-       TestPage.PracticeForm.SetField(value,field);
+        TestPage.PracticeForm.SetField(value, field);
     }
 
     [When(@"user set Gender to '(.*)' in Form")]
@@ -94,4 +126,45 @@ public class NavigationSteps(TestContext testContext)
     {
         TestPage.PracticeForm.UploadImage(_imageRoute);
     }
+
+    [When(@"the user form is filled")]
+    public void WhenTheUserFormIsFilled()
+    {
+        Assert.That(TestPage.PracticeFormSubmitModal.FormModal.Text, Is.EqualTo(_expectedUserForm));
+    }
+
+    [Then(@"alert is visible")]
+    [When(@"alert is visible")]
+    public void ThenAlertIsVisible()
+    {
+        WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
+        alert = wait.Until(drv =>
+        {
+            try
+            {
+                return drv.SwitchTo().Alert();
+            }
+            catch (NoAlertPresentException)
+            {
+                return null;
+            }
+        });
+        if (alert != null)
+            Assert.Pass("Alert is displayed");
+        else
+            Assert.Fail("Alert is not found in 10 seconds");
+    }
+
+    [When(@"User click to '([^']*)' alert")]
+    public void WhenUserClickToAlert(string buttonName)
+    {
+        ClickOnAlertButton(buttonName);
+    }
+
+    [Then(@"user selected '([^']*)'")]
+    public void ThenUserSelected(string expectedText)
+    {
+        Assert.That(TestPage.AlertPage.AlertResultText.Text, Is.EqualTo(expectedText));
+    }
+
 }

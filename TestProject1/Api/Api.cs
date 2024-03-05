@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿// Ignore Spelling: Api
+
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,13 +20,13 @@ namespace TestProject1.Api
         {
             Context = apiContext;
         }
-        protected async Task<HttpResponseData<T>> ConvertResponseData<T>(HttpResponseMessage response)
+        protected async Task<HttpResponseData<T?>> ConvertResponseData<T>(HttpResponseMessage response)
         {
             Context.LastResponseData = response;
             var body = await response.Content.ReadAsStringAsync();
             if (response.IsSuccessStatusCode)
             {
-                return new HttpResponseData<T>()
+                return new HttpResponseData<T?>()
                 {
                     StatusCode = response.StatusCode,
                     Body = JsonConvert.DeserializeObject<T>(body)
@@ -32,7 +34,7 @@ namespace TestProject1.Api
             }
             else
             {
-                return new HttpResponseData<T>()
+                return new HttpResponseData<T?>()
                 {
                     StatusCode = response.StatusCode,
                     Body = default(T),

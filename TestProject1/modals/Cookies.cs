@@ -1,15 +1,9 @@
 ﻿using SeleniumExtras.PageObjects;
+using TestProject1.modals;
 
 namespace TestProject1.Modals;
 
-public class Cookies
+public class Cookies(IWebDriver driver) : AbstractModals(driver)
 {
-    private readonly IWebDriver _driver;
-    public Cookies(IWebDriver driver)
-    {
-        this._driver = driver;
-        PageFactory.InitElements(driver, this);
-    }
-
     public IWebElement? Accept => _driver.FindElement(By.ClassName("fc-cta-consent"));
 }

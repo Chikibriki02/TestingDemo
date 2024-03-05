@@ -17,7 +17,6 @@ namespace TestProject1.Steps
     [Binding]
     public class UserSteps
     {
-        private readonly string _baseUrl = "https://demoqa.com";
         private readonly UserService _userService;
         private readonly BookService _bookService;
         private ApiContext _apiContext;

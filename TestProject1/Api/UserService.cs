@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿// Ignore Spelling: Api
+
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +13,7 @@ namespace TestProject1.Api
 {
     public class UserService(ApiContext apiContext) : Api(apiContext)
     {
-        public async Task<HttpResponseData<User>> CreateUserAsync(CreateUser user)
+        public async Task<HttpResponseData<User?>> CreateUserAsync(CreateUser user)
         {
             var content = new StringContent(JsonConvert.SerializeObject(user), Encoding.UTF8, "application/json");
             var response = await _client.PostAsync($"{_baseUrl}/Account/v1/User", content);
@@ -19,7 +21,7 @@ namespace TestProject1.Api
             return await ConvertResponseData<User>(response);
         }
 
-        public async Task<HttpResponseData<DeleteUser>> DeleteUserAsync(string user)
+        public async Task<HttpResponseData<DeleteUser?>> DeleteUserAsync(string user)
         {
             var response = await _client.DeleteAsync($"{_baseUrl}/Account/v1/User/{user}");
 
@@ -33,14 +35,14 @@ namespace TestProject1.Api
 
             return await ConvertResponseData<bool>(response);
         } 
-        public async Task<HttpResponseData<Token>> GenerateTokenForUserAsync(CreateUser user)
+        public async Task<HttpResponseData<Token?>> GenerateTokenForUserAsync(CreateUser user)
         {
             var content = new StringContent(JsonConvert.SerializeObject(user), Encoding.UTF8, "application/json");
             var response = await _client.PostAsync($"{_baseUrl}/Account/v1/GenerateToken", content);
 
             return await ConvertResponseData<Token>(response);
         } 
-        public async Task<HttpResponseData<User>> GetUserAsync(string user)
+        public async Task<HttpResponseData<User?>> GetUserAsync(string user)
         {
             var response = await _client.GetAsync($"{_baseUrl}/Account/v1/User/{user}");
 

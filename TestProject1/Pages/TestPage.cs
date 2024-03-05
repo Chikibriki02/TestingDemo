@@ -3,6 +3,7 @@ using OpenQA.Selenium.Support.UI;
 using Selenium.DefaultWaitHelpers;
 using SeleniumExtras.PageObjects;
 using SeleniumExtras.WaitHelpers;
+using TestProject1.modals;
 using TestProject1.Modals;
 
 namespace TestProject1.Pages;
@@ -29,7 +30,10 @@ public class TestPage : AbstractPage
 
     public PracticeForm PracticeForm =>
         new(Driver, _wait.Until(ExpectedConditions.ElementToBeClickable((By.ClassName("practice-form-wrapper")))));
+        
 
+    public PracticeFormSubmitModal PracticeFormSubmitModal => new (Driver);
+    public AlertPage AlertPage => new(Driver, _wait.Until(ExpectedConditions.ElementToBeClickable((By.Id("javascriptAlertsWrapper")))));
     public void OpenCategory(string name)
     {
         OpenedCategoryTab.FindElement(By.ClassName("group-header")).Click();

@@ -1,4 +1,5 @@
-﻿Feature: Elements 
+﻿@UI
+Feature: Elements 
     
     Scenario: Go to Element page
         Given Open the page for testing
@@ -33,3 +34,5 @@
         When user fill 'English' to Subject Field in Form
         When user upload an image in Form
         And user click submit button
+        And the user form is filled 
+

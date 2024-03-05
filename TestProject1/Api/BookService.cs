@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿// Ignore Spelling: Api
+
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +13,7 @@ namespace TestProject1.Api
 {
     internal class BookService(ApiContext apiContext) : Api(apiContext)
     {
-        public async Task<HttpResponseData<Books>> GetAllBooksAsync()
+        public async Task<HttpResponseData<Books?>> GetAllBooksAsync()
         {
             var response = await _client.GetAsync($"{_baseUrl}/BookStore/v1/Books");
 
