@@ -31,7 +31,7 @@ jobs:
       
     - name: Update appsettings.json
       run: |
-        jq '.Header = "true"' TestProject1/appsettings.json > temp.json && mv temp.json config/appsettings.json
+        jq '.Header = "true"' TestProject1/appsettings.json > temp.json && mv temp.json TestProject1/appsettings.json
         
     - name: Build 
       run: dotnet build --no-restore
