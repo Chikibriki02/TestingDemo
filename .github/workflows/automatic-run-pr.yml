@@ -25,7 +25,14 @@ jobs:
 
     - name: Install dependencies 
       run: dotnet restore 
-
+      
+    - name: Install jq
+      run: sudo apt-get install jq
+      
+    - name: Update appsettings.json
+      run: |
+        jq '.Header = "true"' appsettings.json > temp.json && mv temp.json appsettings.json
+        
     - name: Build 
       run: dotnet build --no-restore
 
