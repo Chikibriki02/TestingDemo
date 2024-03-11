@@ -7,7 +7,7 @@ using TestProject1.Modals;
 
 namespace TestProject1.modals
 {
-    public class AlertPage(IWebDriver driver, IWebElement parentElement) : AbstactElement(driver, parentElement)
+    public class AlertElement(IWebDriver driver, IWebElement parentElement) : AbstactElement(driver, parentElement)
     {
         public IWebElement AlelrtButton => parentElement.FindElement(By.Id("alertButton"));
         public IWebElement Alelrt5SecButton => parentElement.FindElement(By.Id("timerAlertButton"));

@@ -11,18 +11,18 @@ using TestProject1.Models;
 
 namespace TestProject1.Api
 {
-    public abstract class Api
+    public abstract class ApiClient
     {
-        protected ApiContext Context;
+        protected ApiContext ApiContext;
         protected readonly HttpClient _client = new();
         protected readonly string _baseUrl = "https://demoqa.com";
-        protected Api(ApiContext apiContext)
+        protected ApiClient(ApiContext apiApiContext)
         {
-            Context = apiContext;
+            ApiContext = apiApiContext;
         }
         protected async Task<HttpResponseData<T?>> ConvertResponseData<T>(HttpResponseMessage response)
         {
-            Context.LastResponseData = response;
+            ApiContext.LastResponseData = response;
             var body = await response.Content.ReadAsStringAsync();
             if (response.IsSuccessStatusCode)
             {

@@ -33,7 +33,7 @@ public class TestPage : AbstractPage
         
 
     public PracticeFormSubmitModal PracticeFormSubmitModal => new (Driver);
-    public AlertPage AlertPage => new(Driver, _wait.Until(ExpectedConditions.ElementToBeClickable((By.Id("javascriptAlertsWrapper")))));
+    public AlertElement AlertPage => new(Driver, _wait.Until(ExpectedConditions.ElementToBeClickable((By.Id("javascriptAlertsWrapper")))));
     public void OpenCategory(string name)
     {
         OpenedCategoryTab.FindElement(By.ClassName("group-header")).Click();

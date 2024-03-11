@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TestProject1.Models
 {
-    public class CreateUser
+    public class CreateUserRequest
     {
         [JsonProperty("userName")]
         public string UserName { get; set; }

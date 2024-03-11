@@ -21,7 +21,7 @@ namespace TestProject1.Steps
         private readonly BookService _bookService;
         private ApiContext _apiContext;
         private List<string> _users = new List<string>();
-        private CreateUser _newUser = new CreateUser()
+        private CreateUserRequest _newUser = new CreateUserRequest()
         {
             UserName = Guid.NewGuid().ToString(),
             Password = "123123Aa%"

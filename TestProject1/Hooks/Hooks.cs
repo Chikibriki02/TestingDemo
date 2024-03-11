@@ -36,7 +36,7 @@ namespace TestProject1.Hooks
             var chromeOptions = new ChromeOptions();
             chromeOptions.AddArgument("--force-device-scale-factor=0.85");
 
-            if (AppSettings.Header)
+            if (AppSettings.Headless)
                 chromeOptions.AddArgument("--headless");
 
             chromeOptions.AddArgument("--window-size=1920,1080");
@@ -44,7 +44,7 @@ namespace TestProject1.Hooks
             var driver = new ChromeDriver(chromeOptions);
             driver.Manage().Window.Maximize();
 
-            var seleniumContext = new TestContext
+            var context = new TestContext
             {
                 Driver = driver,
                 HomePage = new HomePage(driver),
@@ -52,7 +52,7 @@ namespace TestProject1.Hooks
                 Cookies = new Cookies(driver)
             };
 
-            container.RegisterInstanceAs(seleniumContext);
+            container.RegisterInstanceAs(context);
         }
 
         [Scope(Tag = "UI")]

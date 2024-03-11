@@ -11,9 +11,9 @@ using TestProject1.Models;
 
 namespace TestProject1.Api
 {
-    public class UserService(ApiContext apiContext) : Api(apiContext)
+    public class UserService(ApiContext apiContext) : ApiClient(apiContext)
     {
-        public async Task<HttpResponseData<User?>> CreateUserAsync(CreateUser user)
+        public async Task<HttpResponseData<User?>> CreateUserAsync(CreateUserRequest user)
         {
             var content = new StringContent(JsonConvert.SerializeObject(user), Encoding.UTF8, "application/json");
             var response = await _client.PostAsync($"{_baseUrl}/Account/v1/User", content);
@@ -21,21 +21,21 @@ namespace TestProject1.Api
             return await ConvertResponseData<User>(response);
         }
 
-        public async Task<HttpResponseData<DeleteUser?>> DeleteUserAsync(string user)
+        public async Task<HttpResponseData<DeleteUserRequest?>> DeleteUserAsync(string user)
         {
             var response = await _client.DeleteAsync($"{_baseUrl}/Account/v1/User/{user}");
 
-            return await ConvertResponseData<DeleteUser>(response);
+            return await ConvertResponseData<DeleteUserRequest>(response);
         }
 
-        public async Task<HttpResponseData<bool>> AuthorizeUserAsync(CreateUser user)
+        public async Task<HttpResponseData<bool>> AuthorizeUserAsync(CreateUserRequest user)
         {
             var content = new StringContent(JsonConvert.SerializeObject(user), Encoding.UTF8, "application/json");
             var response = await _client.PostAsync($"{_baseUrl}/Account/v1/Authorized", content);
 
             return await ConvertResponseData<bool>(response);
         } 
-        public async Task<HttpResponseData<Token?>> GenerateTokenForUserAsync(CreateUser user)
+        public async Task<HttpResponseData<Token?>> GenerateTokenForUserAsync(CreateUserRequest user)
         {
             var content = new StringContent(JsonConvert.SerializeObject(user), Encoding.UTF8, "application/json");
             var response = await _client.PostAsync($"{_baseUrl}/Account/v1/GenerateToken", content);

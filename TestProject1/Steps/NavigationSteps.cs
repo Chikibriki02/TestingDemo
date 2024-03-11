@@ -18,7 +18,7 @@ public class NavigationSteps(TestContext testContext)
     private TestPage TestPage { get; set; } = testContext.TestPage;
     private Cookies Cookies { get; set; } = testContext.Cookies;
 
-    private IAlert alert {get; set; }
+    private IAlert Alert {get; set; }
 
     private readonly string _imageRoute = $"{AppDomain.CurrentDomain.BaseDirectory}Docs/Images/image.png";
     private readonly string _expectedUserForm = "Thanks for submitting the form\r\nLabel Values\r\nStudent Name QWERTY YTREWQ\r\nStudent Email qwerty@gmail.com\r\nGender Male\r\nMobile 1234567890\r\nDate of Birth 19 June,2001\r\nSubjects English\r\nHobbies\r\nPicture image.png\r\nAddress\r\nState and City\r\nClose";
@@ -32,7 +32,7 @@ public class NavigationSteps(TestContext testContext)
             case "On button click, alert will appear after 5 seconds": TestPage.AlertPage.Alelrt5SecButton.Click(); break;
             case "On button click, confirm box will appear": TestPage.AlertPage.AlelrtConfirmButton.Click(); break;
             case "On button click, prompt box will appear": TestPage.AlertPage.AlelrtTextButton.Click(); break;
-            case "qw": HomePage._elements.Click(); break;
+            //case "qqqqqqqq": HomePage._elements.Click(); break;
 
             default: _: throw new Exception("No such button"); break;
         }
@@ -42,8 +42,8 @@ public class NavigationSteps(TestContext testContext)
     {
         switch (buttonName)
         {
-            case "Ok": alert.Accept(); break;
-            case "Cancel": alert.Dismiss(); break;
+            case "Ok": Alert.Accept(); break;
+            case "Cancel": Alert.Dismiss(); break;
 
             default: _: throw new Exception("No such button"); break;
         }
@@ -138,7 +138,7 @@ public class NavigationSteps(TestContext testContext)
     public void ThenAlertIsVisible()
     {
         WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
-        alert = wait.Until(drv =>
+        Alert = wait.Until(drv =>
         {
             try
             {
@@ -149,7 +149,7 @@ public class NavigationSteps(TestContext testContext)
                 return null;
             }
         });
-        if (alert != null)
+        if (Alert != null)
             Assert.Pass("Alert is displayed");
         else
             Assert.Fail("Alert is not found in 10 seconds");

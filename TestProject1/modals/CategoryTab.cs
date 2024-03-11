@@ -12,7 +12,7 @@ public class CategoryTab(IWebDriver driver, IWebElement parentElement) : Abstact
     
     private IList<IWebElement> Tabs => ParentElement.FindElements(By.CssSelector("[class*=\"btn btn-light\"]"));
     
-    private IList<IWebElement> Tabss => Wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.CssSelector("[class*=\"btn btn-light\"]")));
+    //private IList<IWebElement> Tabss => Wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.CssSelector("[class*=\"btn btn-light\"]")));
     
     private IWebElement CheckForCollapsedList => ParentElement.FindElement(By.CssSelector("[class*=\"element-list collapse\"]"));
 

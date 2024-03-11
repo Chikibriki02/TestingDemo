@@ -9,6 +9,6 @@ namespace TestProject1.Hooks
 {
     public class AppSettings
     {
-        public bool Header { get; set; }
+        public bool Headless { get; set; }
     }
 }

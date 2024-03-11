@@ -11,7 +11,7 @@ using TestProject1.Models;
 
 namespace TestProject1.Api
 {
-    internal class BookService(ApiContext apiContext) : Api(apiContext)
+    internal class BookService(ApiContext apiContext) : ApiClient(apiContext)
     {
         public async Task<HttpResponseData<Books?>> GetAllBooksAsync()
         {
