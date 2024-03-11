@@ -21,7 +21,7 @@ public class NavigationSteps(TestContext testContext)
     private IAlert Alert {get; set; }
 
     private readonly string _imageRoute = $"{AppDomain.CurrentDomain.BaseDirectory}Docs/Images/image.png";
-    private readonly string _expectedUserForm = "Thanks for submitting the form\r\nLabel Values\r\nStudent Name QWERTY YTREWQ\r\nStudent Email qwerty@gmail.com\r\nGender Male\r\nMobile 1234567890\r\nDate of Birth 19 June,2001\r\nSubjects English\r\nHobbies\r\nPicture image.png\r\nAddress\r\nState and City\r\nClose";
+    private readonly string _expectedUserForm = "Thanks for submitting the form\nLabel Values\nStudent Name QWERTY YTREWQ\nStudent Email qwerty@gmail.com\nGender Male\nMobile 1234567890\nDate of Birth 19 June,2001\nSubjects English\nHobbies\nPicture image.png\nAddress\nState and City\nClose";
 
     private void ClickOnButton(string buttonName)
     {
@@ -130,7 +130,7 @@ public class NavigationSteps(TestContext testContext)
     [When(@"the user form is filled")]
     public void WhenTheUserFormIsFilled()
     {
-        Assert.That(TestPage.PracticeFormSubmitModal.FormModal.Text, Is.EqualTo(_expectedUserForm));
+        Assert.That(TestPage.PracticeFormSubmitModal.FormModal.Text.Replace("\r",""), Is.EqualTo(_expectedUserForm));
     }
 
     [Then(@"alert is visible")]
