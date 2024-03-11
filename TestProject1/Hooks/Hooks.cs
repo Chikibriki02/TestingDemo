@@ -34,7 +34,7 @@ namespace TestProject1.Hooks
         public static void Setup(IObjectContainer container)
         {
             var chromeOptions = new ChromeOptions();
-            chromeOptions.AddArgument("--force-device-scale-factor=0.85");
+            chromeOptions.AddArgument("--force-device-scale-factor=1");
 
             if (AppSettings.Headless)
                 chromeOptions.AddArgument("--headless");
